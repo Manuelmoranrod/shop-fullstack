@@ -1,7 +1,8 @@
-const express = require('express')
-require("dotenv").config();
+const express = require('express');
+require('dotenv').config();
+require('./utils/DBsql');
 
-
+const process = require('process')
 const app = express()
 const port = process.env.PORT
 
