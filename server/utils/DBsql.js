@@ -8,3 +8,12 @@ const pool = new Pool({
     password: '123abc' //process.env.PASSWORD
 })
 module.exports = pool
+
+
+
+/*
+host: 'localhost', //process.env.HOST,
+user: 'postgres', //process.env.USER,
+database: 'shop', //process.env.DATABASE,
+password: '123abc' //process.env.PASSWORD 
+*/

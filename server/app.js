@@ -6,10 +6,11 @@ const process = require('process')
 const app = express()
 const port = process.env.PORT
 
+const routerApi = require('./routes/api-routes')
+
 // Para evitar problemas de CORS (Cross-Origin Resource Sharing)
 // Añado un middleWare que permite consultas desde orígines de terceros
 // ...
-
 
 // Para habilitar recepcion de JSONs
 app.use(express.urlencoded({ extended: true }));
@@ -18,7 +19,7 @@ app.use(express.json());
 
 //API
 
-//app.use('/api',routerApi); // rutas para API
+app.use('/api',routerApi); // rutas para API
 
 // WEB: usar el Router
 //app.use('/',router); // rutas para WEB
