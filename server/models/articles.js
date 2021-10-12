@@ -1,3 +1,4 @@
+// Importamos la DDBB a la que le vamos a hacer las peticiones
 const dbsql = require('../utils/DBsql')
 
 
@@ -25,7 +26,23 @@ const users = {
         let client, result;
         try {
             client = await dbsql.connect();
-            result = await dbsql.query('SELECT * FROM articles')
+            result = await dbsql.query('SELECT a.id_article,a.article,a.price,a.relevance,m.maker,m.cif,m.direction FROM articles AS a FULL OUTER JOIN makers AS m ON a.id_maker=m.id_maker')
+            //console.log(result.rows);
+            return result.rows
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+        finally {
+            client.release();
+        }
+    },
+    //Select maker by maker-name
+    getAllMakers: async () => {
+        let client, result;
+        try {
+            client = await dbsql.connect();
+            result = await dbsql.query('SELECT * FROM makers')
             //console.log(result.rows);
             return result.rows
         } catch (e) {

@@ -30,30 +30,48 @@ const columns = [
   }
 ];
 
-const Table = () => {
-  const [products, setProducts] = useState([]);
 
+const Table = () => {
+  // Estado inicial del componente TABLE, recoge datos con el fetch/axios
+  const [products, setProducts] = useState([]);
+  //const [makers, setMakers] = useState([]);
+  
+  // Axios a la DDBB de todos los productos
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get('http://localhost:5000/api/articles');
       setProducts(data);
-      console.log(data);
+      //console.log("fetch",data);
     };
     fetchProducts();
   }, []); 
+  
 
+  // Info para expandir cada ARTICLE
+  const ExpandedComponent = ({ data }) => {
+    console.log(data);
+    return (
+      <div className='expanded-info'>
+        <p> Manufacured by: {data.maker}</p>
+        <p>with CIF: {data.cif}</p>
+        <p>direction: {data.direction}</p>
+      </div>
+    )
+  };
   
   return (
     <div className="table">
       <Card>
         <DataTable
-          title="Movies"
+          title="Productos"
           columns={columns}
           data={products}
           defaultSortFieldId={1}
           sortIcon={<SortIcon />}
           pagination
           selectableRows
+          expandableRows
+          expandableRowsComponent={ExpandedComponent}
         />
       </Card>
     </div>

@@ -25,7 +25,19 @@ const apiRouter = {
                 error: error.message
             })
         }
-    }
+    },
+    getAllMakers: async (req,res) => {
+        try{
+            const makers = await Articles.getAllMakers();
+            console.log("All articles: ", makers);
+            res.json(makers)
+
+        }catch(error){
+            res.status(400).json({
+                error: error.message
+            })
+        }
+    },
 }
 
 module.exports = apiRouter
