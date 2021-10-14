@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import DataTable from "react-data-table-component";
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
-import axios from 'axios'
-import { filteredData } from '../../context/filteredData'
+import axios from 'axios';
+import { allData } from '../../context/allData';
 
 
 
@@ -35,16 +35,14 @@ const columns = [
 
 const Table = () => {
   // Estado inicial del componente TABLE, recoge datos con el fetch/axios
-  const [products, setProducts] = useState([]);
-  const { filter, setFilter } = useContext(filteredData)
-
+  const { products, setProducts } = useContext(allData)
   
   // Axios a la DDBB de todos los productos
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get('http://localhost:5000/api/articles');
       setProducts(data);
-      setFilter(data);
+      console.log("productos en fetch", products);
     };
     fetchProducts();
   }, []); 

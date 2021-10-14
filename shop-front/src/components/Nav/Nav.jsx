@@ -1,28 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import { filteredData } from '../../context/filteredData'
+//import { useDebounce } from 'use-debounce';
+
+//import { filteredData } from '../../context/filteredData'
+import { allData } from '../../context/allData'
 
 
 const Nav = () => {
-  const { filter, setFilter } = useContext(filteredData)
-  //const [search, setSearch] = useState([])
-
-  const handleChange = (e)=> {
-    // setFilter(e.target.value)
-    // console.log("change", filter);
-    let value = e.target.value;
-    let result = [];
-    console.log(value);
-    result = filter.filter((data) => {
-    return data.title.search(value) !== -1;
-    });
-    setFilter(result);
-  }
+  const [ filter, setFilter ] = useState([])
+  const { products, setProducts } = useContext(allData)
   
 
+  const handleChange = (e)=> {
+    setFilter(e.target.value)
+  };
 
-
+  useEffect(() => {
+    console.log("Lo que vas a filtrar",filter);
+    if (filter) {
+      //let result = [];
+      const result = products.filter((data) => data.article.toLowerCase().includes(filter.toLowerCase()));
+      setProducts(result);
+      console.log("filtrados",result);
+    }
+  }, [filter]);
+  
   return (
     <Navbar>
       <Container>
