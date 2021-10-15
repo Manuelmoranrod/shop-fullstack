@@ -9,20 +9,17 @@ import { allData } from './context/allData'
 
 
 function App() {
-
   //const [filter, setFilter] = useState([]);
   const [products, setProducts] = useState([]);
 
 
   return (
     <div className="principal">
-      
         <allData.Provider value={{ products, setProducts }}>
           <Header />
           <Table />
         </allData.Provider>
-      
-      <Footer />
+        <Footer />
     </div>
   );
 }

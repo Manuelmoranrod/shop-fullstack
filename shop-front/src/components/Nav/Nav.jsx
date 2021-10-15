@@ -27,7 +27,7 @@ const Nav = () => {
   }, [filter]);
   
   return (
-    <Navbar>
+    <Navbar className="navbar">
       <Container>
 
         <Navbar.Brand href="#home">AWS warehouse</Navbar.Brand>
@@ -41,11 +41,12 @@ const Nav = () => {
               aria-label="Search"
               onChange={handleChange}
             />
-            <Button variant="outline-success">Search</Button>
           </Form>
           <Navbar.Text>
-            Signed in as: <a href="#login">Mark Otto</a>
+            Sign in:
           </Navbar.Text>
+          <Button variant="outline-success">Login</Button>
+
         </Navbar.Collapse>
       </Container>
 
